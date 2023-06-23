@@ -1,7 +1,4 @@
 #include "main.h"
-
-/* Function declaration for _putchar */
-int _putchar(char c);
 /**
  * print_numbers - print number from 0 to 9
  * Description: function that prints the numbers, from 0 to 9
