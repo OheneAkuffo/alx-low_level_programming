@@ -1,10 +1,9 @@
-#include <stdio.h>
-
 #include "lists.h"
+#include "stdio.h"
 
 /**
- * print_listint - prints all the element in a linked list
- * @h: header to the linked list
+ * print_listint - print element in a linked list in the project
+ * @h: header to the linked list in the project
  * Return: number of nodes
  */
 
