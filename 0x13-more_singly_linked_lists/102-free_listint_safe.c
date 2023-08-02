@@ -1,51 +1,41 @@
 #include "lists.h"
 
 /**
- * free_listint_safe - frees a linked list and sets the head to NULL
- * @h: double pointer to the head of the list in the project
- * Return: size of the list that was freed
+ * free_listint_safe - frees a linked list in the project
+ * @h: pointer to the first node in the linked list in the project
+ *
+ * Return: number of elements in the freed list
  */
 
 size_t free_listint_safe(listint_t **h)
 {
-	listint_t *current, *temp;
-	listint_t **addresses = NULL;
-	size_t i, j, found, count;
+	size_t len = 0;
+	int diff;
+	listint_t *temp;
 
-	if (h == NULL || *h == NULL)
+	if (!h || !*h)
 		return (0);
-	while (*h != NULL)
+
+	while (*h)
 	{
-		current = *h;
-		found = 0;
-		for (count = 0, i = 0; i < count; i++)
+		diff = *h - (*h)->next;
+		if (diff > 0)
 		{
-			if (current == addresses[i])
-			{
-				found = 1;
-				break;
-			}
-		}
-		if (!found)
-		{
-			addresses = realloc(addresses, (count + 1) * sizeof(listint_t *));
-			if (addresses == NULL)
-				exit(98);
-			addresses[count] = current;
-			temp = current->next;
-			free(current);
-			count++;
+			temp = (*h)->next;
+			free(*h);
+			*h = temp;
+			len++;
 		}
 		else
 		{
+			free(*h);
 			*h = NULL;
+			len++;
 			break;
 		}
-		*h = temp;
 	}
-	for (j = 0; j < count; j++)
-		addresses[j] = NULL;
-	free(addresses);
+
 	*h = NULL;
-	return (count);
+
+	return (len);
 }
